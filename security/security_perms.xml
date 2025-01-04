@@ -1,0 +1,84 @@
+<odoo>
+
+    <record id="tax_category" model="ir.module.category">
+        <field name="name">Tax Permissions</field>
+    </record>
+
+    <record id="tax_category_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="taxes01.tax_category"/>
+    </record>
+
+    <record id="tax_category_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="taxes01.tax_category"/>
+    </record>
+
+        <!-- Access Rules for Taxes Admin -->
+    <record id="access_taxes01_admin" model="ir.model.access">
+        <field name="name">Taxes Admin Access</field>
+        <field name="model_id" ref="model_taxes01_taxes01"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Access Rules for To-do Admin -->
+    <record id="access_task_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_task_task"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+        <!-- Access Rules for Vat Admin -->
+    <record id="access_vat_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_taxes01_vat"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+        <!-- Access Rules for Income Admin -->
+    <record id="access_income_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_taxes01_income"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+        <!-- Access Rules for Last Check Admin -->
+    <record id="access_last_check_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_last_check"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+            <!-- Access Rules for Tags Admin -->
+    <record id="access_tags_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_task_tag"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+
+</odoo>

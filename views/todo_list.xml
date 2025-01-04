@@ -1,0 +1,97 @@
+<odoo>
+<data>
+
+    <record model="ir.ui.view" id="todo_form_view">
+        <field name="name">task list</field>
+        <field name="model">task.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="create_activity" type="object" class="btn-primary" string="Schedule" icon="fa-clock-o"/>
+                    <field name="due_date"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done" options="{'clickable': '1', 'fold_field': 'fold'}"/>
+                </header>
+                <sheet>
+                    <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
+                    <group>
+                    <!-- Income Group -->
+                    <group string="Income">
+                        <field name="income"/>
+                        <field name="date" string="Date"/>
+                        <field name="notes" string="Notes"/>
+                        <field name="upload"/>
+                    </group>
+                    <br/>
+                    <!-- VAT Group -->
+                    <group string="Vat">
+                        <field name="vat"/>
+                        <field name="notes" string="Notes"/>
+                        <field name="upload"/>
+                    </group>
+                    </group>
+
+                    <br/>
+                    <group>
+                        <group string="Last check">
+                            <field name="last_check"/>
+                            <field name="notes" string="Notes"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="task_kanban_view">
+            <field name="name">task.kanban</field>
+            <field name="model">task.task</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-att-class="'o_kanban_record'">
+                                <div class="o_kanban_primary_left">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                                <div class="o_kanban_primary_right">
+                                    <field name="state" decoration-info="state == 'in_progress'" decoration-success="state == 'done'" widget="badge" />
+                                </div>
+                                <div class="o_kanban_secondary">
+                                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="task_list">
+        <field name="name">task list</field>
+        <field name="model">task.task</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="state" decoration-info="state == 'in_progress'" decoration-success="state == 'done'" widget="badge" />
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="due_date"/>
+                <button name="mark_done" type="object" string="Finished" class="btn btn-link" icon="fa-check"/></list>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="todo_list_action_window">
+        <field name="name">task</field>
+        <field name="res_model">task.task</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+    <menuitem name="ToDo" id="todo_menu_2" parent="taxes01_menu_root"
+        action="todo_list_action_window"/>
+
+
+</data>
+</odoo>
