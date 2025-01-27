@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_taxes01_taxes01,taxes01.taxes01,model_taxes01_taxes01,tax_category_user,1,0,1,0
+access_task_task,task.task,model_task_task,tax_category_user,1,1,1,0
+access_taxes01_vat,taxes01.vat,model_taxes01_vat,tax_category_user,1,0,1,0
+access_taxes01_income,taxes01.income,model_taxes01_income,tax_category_user,1,0,1,0
+access_last_check,last.check,model_last_check,tax_category_user,1,0,1,0
+access_task_tag,task.tag,model_task_tag,tax_category_user,1,0,1,0
+
