@@ -11,36 +11,77 @@
                     <field name="due_date"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done" options="{'clickable': '1', 'fold_field': 'fold'}"/>
                 </header>
-                <sheet>
-                    <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
-                    <group>
-                    <!-- Income Group -->
-                    <group string="Income">
-                        <field name="income"/>
-                        <field name="date" string="Date"/>
-                        <field name="notes" string="Notes"/>
-                        <field name="upload"/>
-                    </group>
-                    <br/>
-                    <!-- VAT Group -->
-                    <group string="Vat">
-                        <field name="vat" invisible='0'/>
-                        <field name="notes" string="Notes"/>
-                        <field name="upload"/>
-                    </group>
-                    </group>
+                     <sheet>
+    <h2>
+        <field name="name" default_focus="1" placeholder="Enter the name"/>
+    </h2>
+    <hr/>
 
-                    <br/>
-                    <group>
-                        <group string="Last check">
-                            <field name="last_check"/>
-                            <field name="notes" string="Notes"/>
-                        </group>
-                    </group>
-                    <group>
-                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                    </group>
-                </sheet>
+    <group>
+        <group>
+            <div class="o_group_title">
+                <i class="fa fa-user"></i> Personal Info. - معلومات شخصيه
+            </div>
+            <field name="phone"/>
+            <field name="state"/>
+            <field name="Registered_E_invoicing"/>
+            <field name="tax_id"/>
+        </group>
+
+        <group>
+            <div class="o_group_title">
+                <i class="fa fa-lock"></i> Credentials - أوراق اعتماد
+            </div>
+            <field name="username"/>
+            <field name="email"/>
+            <field name="password"/>
+            <field name="password2"/>
+        </group>
+    </group>
+
+    <group>
+        <group>
+            <div class="o_group_title">
+                <i class="fa fa-building"></i> Egyptian Tax Authority - مصلحة الضرائب المصرية
+            </div>
+            <field name="is_2023"/>
+            <div class="oe_button_box">
+                <button name="action_redirect_to_taxes" type="object" string="Redirect" class="btn btn-link float-start">
+                    Egyptian Tax Authority<i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </group>
+
+        <group>
+            <div class="o_group_title">
+                <i class="fa fa-percent"></i> Added Value - القيمة المضافة
+            </div>
+            <field name="registration_number"/>
+            <field name="date"/>
+            <div class="oe_button_box">
+                <button name="action_redirect_to_invoices" type="object" string="Redirect" class="btn btn-link float-start">
+                        Added value<i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </group>
+    </group>
+
+    <group>
+       <div class="o_group_title">
+    <i class="fa fa-building"></i> E-invoicing - الفاتورة الإلكترونية
+        </div>
+
+        <field name="registration_company"/>
+        <field name="token_pass"/>
+        <field name="portal_request"/>
+        <div class="oe_button_box">
+            <button name="action_redirect_to_E_invoicing" type="object" string="Redirect" class="btn btn-link float-start">
+                <i class="fa fa-arrow-right"></i>
+            </button>
+        </div>
+    </group>
+</sheet>
+
             </form>
         </field>
     </record>

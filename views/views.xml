@@ -11,73 +11,93 @@
             <div class="row">
               <div class="col-12">
               <div>
-                <sheet>
-                  <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
-                  <hr/>
+<sheet>
+    <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
+    <hr/>
 
-                  <group string="Personal Info.">
-                    <group>
-                      <field name="phone"/>
-                      <field name="state"/>
-                    </group>
-                    <group>
-                      <field name="Registered_E_invoicing"/>
-                      <field name="tax_id"/>
-                    </group>
-                  </group>
-                  <br/>
-                  <group string="Credentials" decoration-bf="1">
-                      <field name="username"/>
-                      <field name="email"/>
-                      <field name="password"/>
-                      <field name="password2"/>
-                  </group>
-                  <br/>
-                  <group>
-                    <group string="Egyptian Tax Authority">
-                      <field name="is_2023"/>
-                      <div class="oe_button_box">
-                        <button name="action_redirect_to_taxes" type="object" string="Redirect" class="btn btn-link float-start"/>
-                      </div>
-                    </group>
+    <!-- Personal Info Section -->
+    <div class="o_group_title">
+        <i class="fa fa-user"></i> Personal Info. - معلومات شخصيه
+    </div>
+    <group col="2">
+        <field name="phone"/>
+        <field name="state"/>
+        <field name="Registered_E_invoicing"/>
+        <field name="tax_id"/>
+    </group>
 
-                    <group string="Added value">
-                      <field name="registration_number"/>
-                      <field name="date"/>
-                      <div class="oe_button_box">
-                        <button name="action_redirect_to_invoices" type="object" string="Redirect" class="btn btn-link float-start"/>
-                      </div>
-                    </group>
-                  </group>
-                  <br/>
-                  <group string="E-invoicing">
-                    <field name="registration_company"/>
-                    <field name="token_pass"/>
-                    <field name="portal_request"/>
-                    <div class="oe_button_box">
-                      <button name="action_redirect_to_E_invoicing" type="object" string="Redirect" class="btn btn-link float-start"/>
-                    </div>
-                  </group>
-                </sheet>
+    <!-- Credentials Section -->
+    <div class="o_group_title">
+        <i class="fa fa-lock"></i> Credentials - أوراق اعتماد
+    </div>
+    <group col="2">
+        <field name="username"/>
+        <field name="email"/>
+        <field name="password"/>
+        <field name="password2"/>
+    </group>
+
+    <!-- Egyptian Tax Authority Section -->
+    <div class="o_group_title">
+        <i class="fa fa-building"></i> Egyptian Tax Authority - مصلحة الضرائب المصرية
+    </div>
+    <group col="2">
+        <field name="is_2023"/>
+        <div class="oe_button_box">
+            <button name="action_redirect_to_taxes" type="object" string="الموقع الخاص بهم" class="btn btn-link float-start"/>
+        </div>
+    </group>
+
+    <!-- Added Value Section -->
+    <div class="o_group_title">
+        <i class="fa fa-percent"></i> Added Value - القيمة المضافة
+    </div>
+    <group col="2">
+        <field name="registration_number"/>
+        <field name="date"/>
+        <div class="oe_button_box">
+            <button name="action_redirect_to_invoices" type="object" string="االموقع الخاص بهم" class="btn btn-link float-start"/>
+        </div>
+    </group>
+
+    <!-- E-invoicing Section -->
+    <div class="o_group_title">
+        <i class="fa fa-file-invoice-dollar"></i> E-invoicing - الفاتورة الإلكترونية
+    </div>
+    <group col="2">
+        <field name="registration_company"/>
+        <field name="token_pass"/>
+        <field name="portal_request"/>
+        <div class="oe_button_box">
+            <button name="action_redirect_to_E_invoicing" type="object" string="الموقع االخاص بهم" class="btn btn-link float-start"/>
+        </div>
+    </group>
+</sheet>
               </div>
               </div>
         
             <div class="col-12">
               <div>
                 <sheet>
-                  <h1>Test</h1>
-                  <group> 
-                  <field name="vat_dropmenue"/>
-                  <field name="vat_date" invisible="vat_dropmenue == 'draft'"/>
-                  <field name="income_dropmenue"/>
-                  <field name="salary_dropmenue"/>
-                  <field name="salary_duration" invisible="salary_dropmenue == 'draft'"/>
-                  <field name="withdrawal_dropmenue"/>
-                  
-                  
-                  </group>
-                  
+                  <h1>Client Additions - اضافات العميل </h1>
 
+                  <group>
+
+                  <group>
+                    <field name="vat_dropmenue"/>
+                    <field name="vat_date" invisible="vat_dropmenue == 'draft'"/>
+                    <field name="income_dropmenue"/>
+                    <field name="salary_dropmenue"/>
+                    <field name="salary_duration" invisible="salary_dropmenue == 'draft'"/>
+                  </group>
+
+                  <group>
+                  <field name="withdrawal_dropmenue"/>
+                  <field name="withdrwal_month_select" string="Select Month" invisible="withdrawal_dropmenue == 'draft'"/>
+                  <field name="real_estate_tax_dropmenue" string="Real Estate Tax"/>
+                  <field name="stamp" string="stamp"/>
+                  </group>
+                  </group>
 
                 </sheet>
               </div>

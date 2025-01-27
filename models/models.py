@@ -76,6 +76,33 @@ class taxes01(models.Model):
         string='withdrwal',
         default='draft'
         )
+    real_estate_tax_dropmenue = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('confirmed', 'Confirmed'),
+            ('done', 'Done'),
+        ],
+        string='withdrwal',
+        default='draft'
+        )
+    stamp = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('confirmed', 'Confirmed'),
+            ('done', 'Done'),
+        ],
+        string='withdrwal',
+        default='draft'
+        )
+    withdrwal_month_select = fields.Selection(
+        [
+            ('jan-mar', 'Jan - Mar'),
+            ('apr-jun', 'Apr - Jun'),
+            ('jul-sep', 'Jul - Sep'),
+            ('oct-dec', 'Oct - Dec'),
+        ],
+        string='withdrwal',
+        )
     username = fields.Char(string='Username')
     email = fields.Char(string='Email1')
     password = fields.Char(string='Password1', required=False, help="Password for the user")
@@ -171,7 +198,12 @@ class taxes01(models.Model):
             record._schedule_activity_every_month()
         if vals.get('withdrawal_dropmenue') == 'confirmed':
             record.schedule_quarterly_activities()
+        if vals.get('real_estate_tax_dropmenue') == 'confirmed':
+            record.schedule_activities_for_december_10()
+        if vals.get('stamp_dropmenue') == 'confirmed':
+            record.schedule_activities_for_december_10()
         return record
+        
 
     
 
