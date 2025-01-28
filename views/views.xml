@@ -2,111 +2,86 @@
   <data>
     <!-- explicit Form view definition -->
 
-    <record model="ir.ui.view" id="taxes01.Form">
-      <field name="name">taxes01 form</field>
-      <field name="model">taxes01.taxes01</field>
-      <field name="arch" type="xml">
+<record model="ir.ui.view" id="taxes01.Form">
+    <field name="name">taxes01 form</field>
+    <field name="model">taxes01.taxes01</field>
+    <field name="arch" type="xml">
         <form string="My Form">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-              <div>
-<sheet>
-    <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
-    <hr/>
+            <div class="container" style="padding: 20px;">
+                <div class="row">
+                    <div class="col-12">
+                        <sheet>
+                            <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
+                            <hr/>
 
-    <!-- Personal Info Section -->
-    <div class="o_group_title">
-        <i class="fa fa-user"></i> Personal Info. - معلومات شخصيه
-    </div>
-    <group col="2">
-        <field name="phone"/>
-        <field name="state"/>
-        <field name="Registered_E_invoicing"/>
-        <field name="tax_id"/>
-    </group>
+                            <group string="Personal Info." icon="fa fa-user">
+                                <group>
+                                    <field name="phone"/>
+                                    <field name="state"/>
+                                </group>
+                                <group>
+                                    <field name="Registered_E_invoicing"/>
+                                    <field name="tax_id"/>
+                                </group>
+                            </group>
+                            <br/>
+                            <group>
+                            <group string="Credentials" decoration-bf="1">
+                              <field name="username"/>
+                              <field name="email"/>
+                              <field name="password"/>
+                              <field name="password2"/>
+                            </group>
+                            <group string="Egyptian Tax Authority">
+                                <field name="is_2023"/>
+                                <button name="action_redirect_to_taxes" type="object" string="Redirect" class="btn btn-link float-start"/>
+                              </group>
+                            </group>
+                            <br/>
+                            <group>
+                              <group string="Added Value">
+                                <field name="registration_number"/>
+                                <field name="date"/>
+                                <button name="action_redirect_to_invoices" type="object" string="Redirect" class="btn btn-link float-start"/>
+                              </group>
 
-    <!-- Credentials Section -->
-    <div class="o_group_title">
-        <i class="fa fa-lock"></i> Credentials - أوراق اعتماد
-    </div>
-    <group col="2">
-        <field name="username"/>
-        <field name="email"/>
-        <field name="password"/>
-        <field name="password2"/>
-    </group>
+                              <group string="E-invoicing">
+                                <field name="registration_company"/>
+                                <field name="token_pass"/>
+                                <field name="portal_request"/>
+                                <button name="action_redirect_to_E_invoicing" type="object" string="Redirect" class="btn btn-link float-start"/>
+                              </group>
+                            </group>
+                            <br/>
+   
+                        </sheet>
 
-    <!-- Egyptian Tax Authority Section -->
-    <div class="o_group_title">
-        <i class="fa fa-building"></i> Egyptian Tax Authority - مصلحة الضرائب المصرية
-    </div>
-    <group col="2">
-        <field name="is_2023"/>
-        <div class="oe_button_box">
-            <button name="action_redirect_to_taxes" type="object" string="الموقع الخاص بهم" class="btn btn-link float-start"/>
-        </div>
-    </group>
-
-    <!-- Added Value Section -->
-    <div class="o_group_title">
-        <i class="fa fa-percent"></i> Added Value - القيمة المضافة
-    </div>
-    <group col="2">
-        <field name="registration_number"/>
-        <field name="date"/>
-        <div class="oe_button_box">
-            <button name="action_redirect_to_invoices" type="object" string="االموقع الخاص بهم" class="btn btn-link float-start"/>
-        </div>
-    </group>
-
-    <!-- E-invoicing Section -->
-    <div class="o_group_title">
-        <i class="fa fa-file-invoice-dollar"></i> E-invoicing - الفاتورة الإلكترونية
-    </div>
-    <group col="2">
-        <field name="registration_company"/>
-        <field name="token_pass"/>
-        <field name="portal_request"/>
-        <div class="oe_button_box">
-            <button name="action_redirect_to_E_invoicing" type="object" string="الموقع االخاص بهم" class="btn btn-link float-start"/>
-        </div>
-    </group>
-</sheet>
-              </div>
-              </div>
-        
-            <div class="col-12">
-              <div>
                 <sheet>
-                  <h1>Client Additions - اضافات العميل </h1>
+                    <h1>Client Additions - اضافات العميل</h1>
+                    <group>
+                    <group> 
+                        <field name="vat_dropmenue"/>
+                        <field name="vat_date" invisible="vat_dropmenue == 'draft'"/>
+                        <field name="income_dropmenue"/>
+                        <field name="salary_dropmenue"/>
+                        <field name="salary_duration" invisible="salary_dropmenue == 'draft'"/>
+                    </group>
 
-                  <group>
-
-                  <group>
-                    <field name="vat_dropmenue"/>
-                    <field name="vat_date" invisible="vat_dropmenue == 'draft'"/>
-                    <field name="income_dropmenue"/>
-                    <field name="salary_dropmenue"/>
-                    <field name="salary_duration" invisible="salary_dropmenue == 'draft'"/>
-                  </group>
-
-                  <group>
-                  <field name="withdrawal_dropmenue"/>
-                  <field name="withdrwal_month_select" string="Select Month" invisible="withdrawal_dropmenue == 'draft'"/>
-                  <field name="real_estate_tax_dropmenue" string="Real Estate Tax"/>
-                  <field name="stamp" string="stamp"/>
-                  </group>
-                  </group>
-
+                    <group>
+                        <field name="withdrawal_dropmenue"/>
+                        <field name="withdrwal_month_select" string="Select Month" invisible="withdrawal_dropmenue == 'draft'"/>
+                        <field name="real_estate_tax_dropmenue" string="Real Estate Tax"/>
+                        <field name="stamp" string="stamp"/>
+                    </group>
+                    </group>
                 </sheet>
               </div>
             </div>
-            </div>
           </div>
         </form>
-      </field>
-    </record>
+    </field>
+</record>
+
 
       <!-- explicit List view definition -->
     <record model="ir.ui.view" id="taxes01.list">
