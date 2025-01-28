@@ -1,15 +1,11 @@
 /* Style for group headers with icons */
 .o_group_title {
-    display: flex;
-    align-items: center;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 20px; /* Add spacing below the header */
     color: #000000; /* Text color for the group title */
 }
 
 .o_group_title i {
-    margin-right: 8px; /* Space between icon and title */
     color: #5a5a5a; /* Icon color */
     font-size: 18px; /* Adjust icon size */
 }
@@ -21,37 +17,26 @@
 
 /* Style for group headers with icons */
 .o_group_title {
-    display: flex;
-    align-items: center;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px; /* Add spacing below the header */
     color: #333; /* Text color for the group title */
 }
 
 .o_group_title i {
-    margin-right: 8px; /* Space between icon and title */
     color: #5a5a5a; /* Icon color */
     font-size: 18px; /* Adjust icon size */
 }
 
 /* Optional: Adjust spacing for button labels */
 .oe_button_box button {
-    display: flex;
-    align-items: center;
     gap: 5px; /* Space between text and icon */
 }
 
 
 .o_group_title {
-    font-weight: bold; /* Make the title bold */
     font-size: 16px; /* Optional: Adjust font size */
-    margin-bottom: 10px; /* Add some spacing below the title */
-    display: flex;
-    align-items: center;
 }
 
 .o_group_title i {
-    margin-right: 8px; /* Add spacing between the icon and text */
     color: #1a1e24; /* Optional: Change the icon color */
 }

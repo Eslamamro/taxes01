@@ -14,7 +14,7 @@
                             <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
                             <hr/>
 
-                            <group string="Personal Info." icon="fa fa-user">
+                            <group string="Personal Info." class="o_group_title" > 
                                 <group>
                                     <field name="phone"/>
                                     <field name="state"/>

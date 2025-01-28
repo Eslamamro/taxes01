@@ -23,7 +23,7 @@
                     </group>
                     <br/>
                     <!-- VAT Group -->
-                    <group string="Vat">
+                    <group string="Vat" invisible="hide_vat == 'draft'">
                         <field name="vat"/>
                         <field name="notes" string="Notes"/>
                         <field name="upload"/>

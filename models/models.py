@@ -169,7 +169,46 @@ class taxes01(models.Model):
         # Get the current year
         current_year = datetime.now().year
         # Define the target date for December 10
-        target_date = datetime(current_year, 12, 10)
+        target_date = datetime(current_year, 12, 15)
+
+        for record in self:
+            # Create an activity for each record in the current set
+            self.env['mail.activity'].create({
+                'res_model_id': self.env['ir.model']._get(self._name).id,  # Get the model ID dynamically
+                'res_id': record.id,  # Attach the activity to the specific record
+                'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,  # Default TODO activity type
+                'summary': 'Follow-up for December 10',  # A short description
+                'note': 'This is a scheduled activity for December 10.',  # A detailed note
+                'date_deadline': target_date,  # Set the deadline to December 10
+                'user_id': self.env.user.id,  # Assign the activity to the current user
+            })
+    
+    def schedule_activities_for_jan_mar_20(self):
+        """Schedules activities for December 10 of the current year."""
+        # Get the current year
+        current_year = datetime.now().year
+        # Define the target date for December 10
+        target_date = datetime(current_year, 3, 20)
+
+        for record in self:
+            # Create an activity for each record in the current set
+            self.env['mail.activity'].create({
+                'res_model_id': self.env['ir.model']._get(self._name).id,  # Get the model ID dynamically
+                'res_id': record.id,  # Attach the activity to the specific record
+                'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,  # Default TODO activity type
+                'summary': 'Follow-up for December 10',  # A short description
+                'note': 'This is a scheduled activity for December 10.',  # A detailed note
+                'date_deadline': target_date,  # Set the deadline to December 10
+                'user_id': self.env.user.id,  # Assign the activity to the current user
+            })
+    
+
+    def schedule_activities_for_apr_jun_20(self):
+        """Schedules activities for December 10 of the current year."""
+        # Get the current year
+        current_year = datetime.now().year
+        # Define the target date for December 10
+        target_date = datetime(current_year, 6, 20)
 
         for record in self:
             # Create an activity for each record in the current set
@@ -183,6 +222,44 @@ class taxes01(models.Model):
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
 
+    def schedule_activities_for_jul_sep_20(self):
+        """Schedules activities for December 10 of the current year."""
+        # Get the current year
+        current_year = datetime.now().year
+        # Define the target date for December 10
+        target_date = datetime(current_year, 9, 20)
+
+        for record in self:
+            # Create an activity for each record in the current set
+            self.env['mail.activity'].create({
+                'res_model_id': self.env['ir.model']._get(self._name).id,  # Get the model ID dynamically
+                'res_id': record.id,  # Attach the activity to the specific record
+                'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,  # Default TODO activity type
+                'summary': 'Follow-up for December 10',  # A short description
+                'note': 'This is a scheduled activity for December 10.',  # A detailed note
+                'date_deadline': target_date,  # Set the deadline to December 10
+                'user_id': self.env.user.id,  # Assign the activity to the current user
+            })
+
+    def schedule_activities_for_oct_dec_20(self):
+        """Schedules activities for December 10 of the current year."""
+        # Get the current year
+        current_year = datetime.now().year
+        # Define the target date for December 10
+        target_date = datetime(current_year, 12, 20)
+
+        for record in self:
+            # Create an activity for each record in the current set
+            self.env['mail.activity'].create({
+                'res_model_id': self.env['ir.model']._get(self._name).id,  # Get the model ID dynamically
+                'res_id': record.id,  # Attach the activity to the specific record
+                'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,  # Default TODO activity type
+                'summary': 'Follow-up for December 10',  # A short description
+                'note': 'This is a scheduled activity for December 10.',  # A detailed note
+                'date_deadline': target_date,  # Set the deadline to December 10
+                'user_id': self.env.user.id,  # Assign the activity to the current user
+            })
+    
 
     @api.model
     def create(self, vals):
@@ -196,8 +273,14 @@ class taxes01(models.Model):
             record.schedule_activities_for_december_10()
         if vals.get('salary_dropmenue') == 'confirmed':
             record._schedule_activity_every_month()
-        if vals.get('withdrawal_dropmenue') == 'confirmed':
-            record.schedule_quarterly_activities()
+        if vals.get('withdrwal_month_select') == 'jan-mar':
+            record.schedule_activities_for_jan_mar_20()
+        if  vals.get('withdrwal_month_select') == 'apr-jun':
+            record.schedule_activities_for_apr_jun_20()
+        if vals.get('withdrwal_month_select') == 'jul-sep':
+            record.schedule_activities_for_jul_sep_20()
+        if vals.get('withdrwal_month_select') == 'oct-dec':
+            record.schedule_activities_for_oct_dec_20()   
         if vals.get('real_estate_tax_dropmenue') == 'confirmed':
             record.schedule_activities_for_december_10()
         if vals.get('stamp_dropmenue') == 'confirmed':
@@ -218,9 +301,18 @@ class taxes01(models.Model):
             self.schedule_activities_for_december_10()
         if vals.get('salary_dropmenue') == 'confirmed':
             self._schedule_activity_every_month()
-        if vals.get('withdrawal_dropmenue') == 'confirmed':
-            self.schedule_quarterly_activities()
-
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'jan-mar':
+            self.schedule_activities_for_jan_mar_20()
+            # elif vals.get('withdrwal_month_select') == 'apr-jun':
+            #     self.schedule_activities_for_apr_jun_20()
+            # elif vals.get('withdrwal_month_select') == 'jul-sep':
+            #     self.schedule_activities_for_jul_sep_20()
+            # elif vals.get('withdrwal_month_select') == 'oct-dec':
+            #     self.schedule_activities_for_oct_dec_20()
+        if vals.get('real_estate_tax_dropmenue') == 'confirmed':
+            self.schedule_activities_for_december_10()
+        if vals.get('stamp_dropmenue') == 'confirmed':
+            self.schedule_activities_for_december_10()
         return result
 
     def action_redirect_to_taxes(self):
@@ -257,6 +349,8 @@ class Task(models.Model):
     notes = fields.Html(string='Notes')
     upload = fields.Binary()
     income = fields.Many2one('taxes01.income', string='Income')
+
+    hide_vat = fields.Selection(related="name.vat_dropmenue")
 
     last_check = fields.Many2one(
         'last.check',
