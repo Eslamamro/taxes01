@@ -10,7 +10,7 @@ class taxes01(models.Model):
     _description = 'taxes01.taxes01'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string='Name')
+    name = fields.Char(string='Name', required=True)
     phone = fields.Char(string='Phone')
     state = fields.Char(string="State")
     Registered_E_invoicing = fields.Boolean(string="E-invoicing")
@@ -46,6 +46,15 @@ class taxes01(models.Model):
             ('done', 'Done'),
         ],
         string='income',
+        default='draft'
+        )
+    lastcheck_dropmenue = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('confirmed', 'Confirmed'),
+            ('done', 'Done'),
+        ],
+        string='lastcheck',
         default='draft'
         )
     salary_dropmenue = fields.Selection(
@@ -85,7 +94,7 @@ class taxes01(models.Model):
         string='withdrwal',
         default='draft'
         )
-    stamp = fields.Selection(
+    stamp_dropmenue = fields.Selection(
         [
             ('draft', 'Draft'),
             ('confirmed', 'Confirmed'),
@@ -102,12 +111,13 @@ class taxes01(models.Model):
             ('oct-dec', 'Oct - Dec'),
         ],
         string='withdrwal',
+        default='',
         )
     username = fields.Char(string='Username')
     email = fields.Char(string='Email1')
     password = fields.Char(string='Password1', required=False, help="Password for the user")
     password2 = fields.Char(string='Password2', required=False, help="Password for the user")
-    tag_ids = fields.Many2many('task.tag', string="Tags")
+    tag_ids = fields.Many2many('task.tag')
     tax_id = fields.Char(string='Tax ID')
     
     def _schedule_activity_every_month(self):
@@ -126,15 +136,22 @@ class taxes01(models.Model):
                 'user_id': self.env.user.id,  # Assigned to the current user
             })
 
-            self.env['task.task'].create({
-                        'name': record.id,  # Reference the record ID for Many2one
-                        'state': 'in_progress',  # Default state
-                        'notes': '',  # Optional default value
-                        'income': None,  # Optional if no income field
-                        'vat': None,  # Optional if no vat field
-                        'phone': record.phone or '',  # Use phone if available, or empty
-                        'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
-                    })
+            existing_task = self.env['task.task'].search([
+                ('name', '=', record.id),
+                ('state', 'in', ['in_progress', 'done'])
+            ], limit=1)
+
+            if not existing_task or existing_task.state == 'done':
+                self.env['task.task'].create({
+                    'name': record.id,  # Reference the record ID for Many2one
+                    'state': 'in_progress',  # Default state
+                    'notes': '',  # Optional default value
+                    'income': None,  # Optional if no income field
+                    'vat': None,  # Optional if no vat field
+                    'phone': record.phone or '',  # Use phone if available, or empty
+                    'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
+                })
+
 
 
     def schedule_quarterly_activities(self):
@@ -163,6 +180,22 @@ class taxes01(models.Model):
                     'user_id': self.env.user.id,  # Assign the activity to the current user
                 })
 
+            existing_task = self.env['task.task'].search([
+                ('name', '=', record.id),
+                ('state', 'in', ['in_progress', 'done'])
+            ], limit=1)
+
+            if not existing_task or existing_task.state == 'done':
+                self.env['task.task'].create({
+                    'name': record.id,  # Reference the record ID for Many2one
+                    'state': 'in_progress',  # Default state
+                    'notes': '',  # Optional default value
+                    'income': None,  # Optional if no income field
+                    'vat': None,  # Optional if no vat field
+                    'phone': record.phone or '',  # Use phone if available, or empty
+                    'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
+                })
+
 
     def schedule_activities_for_december_10(self):
         """Schedules activities for December 10 of the current year."""
@@ -182,6 +215,22 @@ class taxes01(models.Model):
                 'date_deadline': target_date,  # Set the deadline to December 10
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
+
+            existing_task = self.env['task.task'].search([
+                ('name', '=', record.id),
+                ('state', 'in', ['in_progress', 'done'])
+            ], limit=1)
+
+            if not existing_task or existing_task.state == 'done':
+                self.env['task.task'].create({
+                    'name': record.id,  # Reference the record ID for Many2one
+                    'state': 'in_progress',  # Default state
+                    'notes': '',  # Optional default value
+                    'income': None,  # Optional if no income field
+                    'vat': None,  # Optional if no vat field
+                    'phone': record.phone or '',  # Use phone if available, or empty
+                    'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
+                })
     
     def schedule_activities_for_jan_mar_20(self):
         """Schedules activities for December 10 of the current year."""
@@ -201,7 +250,22 @@ class taxes01(models.Model):
                 'date_deadline': target_date,  # Set the deadline to December 10
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
-    
+            
+            existing_task = self.env['task.task'].search([
+                ('name', '=', record.id),
+                ('state', 'in', ['in_progress', 'done'])
+            ], limit=1)
+
+            if not existing_task or existing_task.state == 'done':
+                self.env['task.task'].create({
+                    'name': record.id,  # Reference the record ID for Many2one
+                    'state': 'in_progress',  # Default state
+                    'notes': '',  # Optional default value
+                    'income': None,  # Optional if no income field
+                    'vat': None,  # Optional if no vat field
+                    'phone': record.phone or '',  # Use phone if available, or empty
+                    'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
+                })
 
     def schedule_activities_for_apr_jun_20(self):
         """Schedules activities for December 10 of the current year."""
@@ -222,6 +286,22 @@ class taxes01(models.Model):
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
 
+            existing_task = self.env['task.task'].search([
+                ('name', '=', record.id),
+                ('state', 'in', ['in_progress', 'done'])
+            ], limit=1)
+
+            if not existing_task or existing_task.state == 'done':
+                self.env['task.task'].create({
+                    'name': record.id,  # Reference the record ID for Many2one
+                    'state': 'in_progress',  # Default state
+                    'notes': '',  # Optional default value
+                    'income': None,  # Optional if no income field
+                    'vat': None,  # Optional if no vat field
+                    'phone': record.phone or '',  # Use phone if available, or empty
+                    'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
+                })
+
     def schedule_activities_for_jul_sep_20(self):
         """Schedules activities for December 10 of the current year."""
         # Get the current year
@@ -241,6 +321,22 @@ class taxes01(models.Model):
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
 
+            existing_task = self.env['task.task'].search([
+                ('name', '=', record.id),
+                ('state', 'in', ['in_progress', 'done'])
+            ], limit=1)
+
+            if not existing_task or existing_task.state == 'done':
+                self.env['task.task'].create({
+                    'name': record.id,  # Reference the record ID for Many2one
+                    'state': 'in_progress',  # Default state
+                    'notes': '',  # Optional default value
+                    'income': None,  # Optional if no income field
+                    'vat': None,  # Optional if no vat field
+                    'phone': record.phone or '',  # Use phone if available, or empty
+                    'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
+                })
+
     def schedule_activities_for_oct_dec_20(self):
         """Schedules activities for December 10 of the current year."""
         # Get the current year
@@ -259,7 +355,23 @@ class taxes01(models.Model):
                 'date_deadline': target_date,  # Set the deadline to December 10
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
-    
+
+            existing_task = self.env['task.task'].search([
+                ('name', '=', record.id),
+                ('state', 'in', ['in_progress', 'done'])
+            ], limit=1)
+
+            if not existing_task or existing_task.state == 'done':
+                self.env['task.task'].create({
+                    'name': record.id,  # Reference the record ID for Many2one
+                    'state': 'in_progress',  # Default state
+                    'notes': '',  # Optional default value
+                    'income': None,  # Optional if no income field
+                    'vat': None,  # Optional if no vat field
+                    'phone': record.phone or '',  # Use phone if available, or empty
+                    'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
+                })
+
 
     @api.model
     def create(self, vals):
@@ -275,12 +387,12 @@ class taxes01(models.Model):
             record._schedule_activity_every_month()
         if vals.get('withdrwal_month_select') == 'jan-mar':
             record.schedule_activities_for_jan_mar_20()
-        if  vals.get('withdrwal_month_select') == 'apr-jun':
+        if vals.get('withdrwal_month_select') == 'apr-jun':
             record.schedule_activities_for_apr_jun_20()
         if vals.get('withdrwal_month_select') == 'jul-sep':
             record.schedule_activities_for_jul_sep_20()
         if vals.get('withdrwal_month_select') == 'oct-dec':
-            record.schedule_activities_for_oct_dec_20()   
+            record.schedule_activities_for_oct_dec_20()
         if vals.get('real_estate_tax_dropmenue') == 'confirmed':
             record.schedule_activities_for_december_10()
         if vals.get('stamp_dropmenue') == 'confirmed':
@@ -303,12 +415,14 @@ class taxes01(models.Model):
             self._schedule_activity_every_month()
         if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'jan-mar':
             self.schedule_activities_for_jan_mar_20()
-            # elif vals.get('withdrwal_month_select') == 'apr-jun':
-            #     self.schedule_activities_for_apr_jun_20()
-            # elif vals.get('withdrwal_month_select') == 'jul-sep':
-            #     self.schedule_activities_for_jul_sep_20()
-            # elif vals.get('withdrwal_month_select') == 'oct-dec':
-            #     self.schedule_activities_for_oct_dec_20()
+        if vals.get('withdrwal_month_select') == 'jan-mar':
+            self.schedule_activities_for_jan_mar_20()
+        elif vals.get('withdrwal_month_select') == 'apr-jun':
+            self.schedule_activities_for_apr_jun_20()
+        elif vals.get('withdrwal_month_select') == 'jul-sep':
+            self.schedule_activities_for_jul_sep_20()
+        elif vals.get('withdrwal_month_select') == 'oct-dec':
+            self.schedule_activities_for_oct_dec_20()
         if vals.get('real_estate_tax_dropmenue') == 'confirmed':
             self.schedule_activities_for_december_10()
         if vals.get('stamp_dropmenue') == 'confirmed':
@@ -349,9 +463,17 @@ class Task(models.Model):
     notes = fields.Html(string='Notes')
     upload = fields.Binary()
     income = fields.Many2one('taxes01.income', string='Income')
+    salary = fields.Many2one('salary.name', string='Salary') 
+    withdrwal = fields.Many2one('withdrwal.name', string='Withdrwal') 
+    realestate = fields.Many2one('realestate.name', string= 'Realestate')
 
+# hiding and showing in the todo xml if draft it will vanish
     hide_vat = fields.Selection(related="name.vat_dropmenue")
-
+    hide_income = fields.Selection(related="name.income_dropmenue")
+    hide_lastcheck = fields.Selection(related="name.lastcheck_dropmenue")
+    hide_salary = fields.Selection(related="name.salary_dropmenue")
+    hide_withdrawal = fields.Selection(related="name.withdrawal_dropmenue")
+    hide_realestate = fields.Selection(related="name.real_estate_tax_dropmenue")
     last_check = fields.Many2one(
         'last.check',
         string='Last check')
@@ -365,6 +487,9 @@ class Task(models.Model):
         ('done', 'Done'),
     ], string='Status', default='draft', track_visibility='onchange', required=True)
         
+
+    def donothing(self):
+        pass
 
     def mark_done(self):
         """Mark the task as 'Done' and remove associated activities."""
@@ -510,10 +635,62 @@ class LastCheck(models.Model):
         """Automatically create default records when the module is installed."""
         self._create_default_records()
 
+class Salary(models.Model):
+    _name = 'salary.name'
+    _description = 'Salary Details'
 
+    name = fields.Char(string='Salary Name')
 
+    @api.model  
+    def _create_default_records(self):
+        """Create default salary records if they don't already exist."""
+        default_records = [
+            {'name': 'Yearly'},
+            {'name': 'Monthly'},
+            {'name': 'Quarter'},
+        ]
 
+        for record in default_records:
+            if not self.search([('name', '=', record['name'])]):
+                self.create(record)
 
+class  Withdrwal(models.Model):
+    _name = 'withdrwal.name'
+    _description = 'Withdrwal Details'
+
+    name = fields.Char(string='Withdrwal Name')
+
+    @api.model  
+    def _create_default_records(self):
+        """Create default salary records if they don't already exist."""
+        default_records = [
+            {'name': 'Yearly'},
+            {'name': 'Monthly'},
+            {'name': 'Quarter'},
+        ]
+
+        for record in default_records:
+            if not self.search([('name', '=', record['name'])]):
+                self.create(record)
+
+class  RealEstate(models.Model):
+    _name = 'realestate.name'
+    _description = 'RealEstate Details'
+
+    name = fields.Char(string='RealEstate Name')
+
+    @api.model  
+    def _create_default_records(self):
+        """Create default salary records if they don't already exist."""
+        default_records = [
+            {'name': 'Yearly'},
+            {'name': 'Monthly'},
+            {'name': 'Quarter'},
+        ]
+
+        for record in default_records:
+            if not self.search([('name', '=', record['name'])]):
+                self.create(record)
 
 class TaskTag(models.Model):
     _name = 'task.tag'

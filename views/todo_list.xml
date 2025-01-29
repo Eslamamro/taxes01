@@ -6,79 +6,180 @@
         <field name="model">task.task</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <button name="create_activity" type="object" class="btn-primary" string="Schedule" icon="fa-clock-o"/>
-                    <field name="due_date"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done" options="{'clickable': '1', 'fold_field': 'fold'}"/>
-                </header>
-                <sheet>
-                    <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
-                    <group>
-                    <!-- Income Group -->
-                    <group string="Income">
-                        <field name="income"/>
-                        <field name="date" string="Date"/>
-                        <field name="notes" string="Notes"/>
-                        <field name="upload"/>
-                    </group>
-                    <br/>
-                    <!-- VAT Group -->
-                    <group string="Vat" invisible="hide_vat == 'draft'">
-                        <field name="vat"/>
-                        <field name="notes" string="Notes"/>
-                        <field name="upload"/>
-                    </group>
-                    </group>
+                            <header>
+                                <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done" options="{'clickable': '1', 'fold_field': 'fold'}"/>
+                            </header>
+                            <sheet>
+                                <h1 class="d-flex flex-row align-items-center">
+                                    <field name="name" default_focus="1" placeholder="Client name" style="font-size: min(4vw, 2.2rem);" />
+                                </h1>
+                                    <!-- Income Group -->
+                            
+                                        <group invisible="hide_income == 'draft'">
+                                            <div id="accordion">
+                                                    <div class="card">
+                                                            <!-- X Icon -->
+                                                            
+                                                        <div class="card-body bg-secondary" id="headingOne">
+                                                            <h5 class="mb-0">
+                                                                
+                                                                <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <h4 class="card-title">INCOME</h4>
+                                                                    
+                                                                </button>
+                                                            </h5>
+                                                        </div>
 
-                    <br/>
-                    <group>
-                        <group string="Last check">
-                            <field name="last_check"/>
-                            <field name="notes" string="Notes"/>
-                        </group>
-                    </group>
-                    <group>
-                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                    </group>
-                </sheet>
+                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                                <div class="card-body">
+                                                                    <group>
+                                                                        <field name="income"/>
+                                                                        <field name="date" string="Date"/>
+                                                                        <field name="notes" string="Notes"/>
+                                                                        <field name="upload"/>
+                                                                    </group>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                        </group>             
+                                    
+                                    <!-- VAT Group -->
+                                        <group  invisible="hide_vat == 'draft'">
+                                            <div id="accordion">
+                                                    <div class="card">
+                                                        <div class="card-body bg-secondary" id="headingOne">
+                                                            <h5 class="mb-0">
+                                                                <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                    <h4 class="card-title">VALUE-ADDED TAX</h4>
+                                                                </button>
+                                                            </h5>
+                                                        </div>
+
+                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                                <div class="card-body">
+                                                                    <group>
+                                                                        <field name="vat"/>
+                                                                        <field name="notes" string="Notes"/>
+                                                                        <field name="upload"/>
+                                                                    </group>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                        </group>
+
+                                    <group invisible="hide_lastcheck == 'draft'">
+                                        <div id="accordion">
+                                            <div class="card">
+                                            <div class="card-body bg-secondary" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                        <h4 class="card-title">LAST CHECK</h4>
+                                                    </button>
+                                                </h5>
+                                            </div>
+
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <group>
+                                                            <field name="last_check"/>
+                                                            <field name="notes" string="Notes"/>
+                                                        </group>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </group>  
+                                                        <!--Salary-->
+                                    <group invisible="hide_salary == 'draft'">
+                                        <div id="accordion">
+                                            <div class="card">
+                                            <div class="card-body bg-secondary" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
+                                                        <h4 class="card-title">SALARY</h4>
+                                                    </button>
+                                                </h5>
+                                            </div>
+
+                                                <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <group>
+                                                            <field name="salary"/>
+                                                            <field name="notes" string="Notes"/>
+                                                        </group>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </group> 
+                                <!--withdrwal-->
+                                    <group invisible="hide_withdrawal == 'draft'">
+                                        <div id="accordion">
+                                            <div class="card">
+                                            <div class="card-body bg-secondary" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseFive" aria-expanded="true" aria-controls="collapseThree">
+                                                        <h4 class="card-title">WITHDRWAL</h4>
+                                                    </button>
+                                                </h5>
+                                            </div>
+
+                                                <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <group>
+                                                            <field name="withdrwal"/>
+                                                            <field name="notes" string="Notes"/>
+                                                        </group>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </group> 
+                                <!--RealEstate-->
+                                    <group invisible="hide_realestate == 'draft'">
+                                        <div id="accordion">
+                                            <div class="card">
+                                            <div class="card-body bg-secondary" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseSix" aria-expanded="true" aria-controls="collapseThree">
+                                                        <h4 class="card-title">REALSTATE</h4>
+                                                    </button>
+                                                </h5>
+                                            </div>
+
+                                                <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <group>
+                                                            <field name="realestate"/>
+                                                            <field name="notes" string="Notes"/>
+                                                        </group>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </group> 
+                                <group>
+                                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                                </group>  
+                            </sheet>    
             </form>
         </field>
     </record>
 
-        <record model="ir.ui.view" id="task_kanban_view">
-            <field name="name">task.kanban</field>
-            <field name="model">task.task</field>
-            <field name="arch" type="xml">
-                <kanban default_group_by="state">
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div t-att-class="'o_kanban_record'">
-                                <div class="o_kanban_primary_left">
-                                    <strong><field name="name"/></strong>
-                                </div>
-                                <div class="o_kanban_primary_right">
-                                    <field name="state" decoration-info="state == 'in_progress'" decoration-success="state == 'done'" widget="badge" />
-                                </div>
-                                <div class="o_kanban_secondary">
-                                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
 
     <record model="ir.ui.view" id="task_list">
         <field name="name">task list</field>
         <field name="model">task.task</field>
         <field name="arch" type="xml">
-            <list>
+            <list string="Task List" default_group_by="state">
                 <field name="name"/>
                 <field name="state" decoration-info="state == 'in_progress'" decoration-success="state == 'done'" widget="badge" />
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="due_date"/>
-                <button name="mark_done" type="object" string="Finished" class="btn btn-link" icon="fa-check"/></list>
+                <button name="mark_done" type="object" string="Done" class="btn btn-link" icon="fa-check"/>
+            </list>
         </field>
     </record>
 
@@ -86,7 +187,7 @@
     <record model="ir.actions.act_window" id="todo_list_action_window">
         <field name="name">task</field>
         <field name="res_model">task.task</field>
-        <field name="view_mode">list,form,kanban</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem name="ToDo" id="todo_menu_2" parent="taxes01_menu_root"

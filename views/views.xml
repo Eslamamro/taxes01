@@ -11,25 +11,22 @@
                 <div class="row">
                     <div class="col-12">
                         <sheet>
-                            <h2><field name="name" default_focus="1" placeholder="Enter the name"/></h2>
-                            <hr/>
+                            <h1 class="d-flex flex-row align-items-center">
+                              <field name="name" default_focus="1" placeholder="Client name" style="font-size: min(4vw, 2.2rem);" />
+                            </h1>
 
                             <group string="Personal Info." class="o_group_title" > 
-                                <group>
-                                    <field name="phone"/>
-                                    <field name="state"/>
-                                </group>
-                                <group>
+                                    <field name="phone" placeholder="+20" />
+                                    <field name="state" placeholder="city"/>
+                                    <field name="tax_id" placeholder="e.g. BE0477472701"/>
                                     <field name="Registered_E_invoicing"/>
-                                    <field name="tax_id"/>
-                                </group>
                             </group>
                             <br/>
                             <group>
                             <group string="Credentials" decoration-bf="1">
                               <field name="username"/>
-                              <field name="email"/>
-                              <field name="password"/>
+                              <field name="email" placeholder="example@gmail.com"/>
+                              <field name="password" placeholder=""/>
                               <field name="password2"/>
                             </group>
                             <group string="Egyptian Tax Authority">
@@ -41,7 +38,7 @@
                             <group>
                               <group string="Added Value">
                                 <field name="registration_number"/>
-                                <field name="date"/>
+                                <field name="date" placeholder="MM/DD/YY"/>
                                 <button name="action_redirect_to_invoices" type="object" string="Redirect" class="btn btn-link float-start"/>
                               </group>
 
@@ -58,7 +55,7 @@
 
                 <sheet>
                     <h1>Client Additions - اضافات العميل</h1>
-                    <group>
+                     <group>
                     <group> 
                         <field name="vat_dropmenue"/>
                         <field name="vat_date" invisible="vat_dropmenue == 'draft'"/>
@@ -68,10 +65,11 @@
                     </group>
 
                     <group>
+                        <field name="lastcheck_dropmenue"/>
                         <field name="withdrawal_dropmenue"/>
                         <field name="withdrwal_month_select" string="Select Month" invisible="withdrawal_dropmenue == 'draft'"/>
                         <field name="real_estate_tax_dropmenue" string="Real Estate Tax"/>
-                        <field name="stamp" string="stamp"/>
+                        <field name="stamp_dropmenue" string="stamp"/>
                     </group>
                     </group>
                 </sheet>
