@@ -15,7 +15,7 @@
                               <field name="name" default_focus="1" placeholder="Client name" style="font-size: min(4vw, 2.2rem);" />
                             </h1>
 
-                            <group string="Personal Info." class="o_group_title" > 
+                            <group string="Personal Info ." class="fw-bold" > 
                                     <field name="phone" placeholder="+20" />
                                     <field name="state" placeholder="city"/>
                                     <field name="tax_id" placeholder="e.g. BE0477472701"/>

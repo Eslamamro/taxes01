@@ -13,156 +13,182 @@
                                 <h1 class="d-flex flex-row align-items-center">
                                     <field name="name" default_focus="1" placeholder="Client name" style="font-size: min(4vw, 2.2rem);" />
                                 </h1>
+                                <hr/>
+                                <br/>
                                     <!-- Income Group -->
-                            
                                         <group invisible="hide_income == 'draft'">
                                             <div id="accordion">
-                                                    <div class="card">
-                                                            <!-- X Icon -->
-                                                            
-                                                        <div class="card-body bg-secondary" id="headingOne">
-                                                            <h5 class="mb-0">
-                                                                
-                                                                <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                    <h4 class="card-title">INCOME</h4>
-                                                                    
-                                                                </button>
-                                                            </h5>
+                                                <div class="card border-0">
+                                                    <div class="card-header rounded-4 p-2 d-flex justify-content-between align-items-center" id="headingOne">
+                                                        <h5 class="mb-0 d-flex align-items-center">
+                                                            <button class="btn btn-link fw-bold p-0" data-bs-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                INCOME
+                                                            </button>
+                                                        </h5>
+                                                        <div>
+                                                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/> <!-- Another Odoo tag field -->
                                                         </div>
-
-                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    <group>
-                                                                        <field name="income"/>
-                                                                        <field name="date" string="Date"/>
-                                                                        <field name="notes" string="Notes"/>
-                                                                        <field name="upload"/>
-                                                                    </group>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <button type="button" name="close_card" class="btn-close btn-close-check" aria-label="Close"></button>
                                                     </div>
-                                        </group>             
-                                    
-                                    <!-- VAT Group -->
-                                        <group  invisible="hide_vat == 'draft'">
-                                            <div id="accordion">
-                                                    <div class="card">
-                                                        <div class="card-body bg-secondary" id="headingOne">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                    <h4 class="card-title">VALUE-ADDED TAX</h4>
-                                                                </button>
-                                                            </h5>
+                                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                        <div class="card-body p-3">
+                                                            <group>
+                                                                <field name="income" string="Value-Added Tax"/>
+                                                                <field name="notes" string="Notes"/>
+                                                            </group>
                                                         </div>
-
-                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    <group>
-                                                                        <field name="vat"/>
-                                                                        <field name="notes" string="Notes"/>
-                                                                        <field name="upload"/>
-                                                                    </group>
-                                                                </div>
-                                                            </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </group>            
+                                                                                
+                                        <!-- VAT Group -->
+                                        <group invisible="hide_vat == 'draft'">
+                                            <div id="accordion">
+                                                <div class="card rounded border-0">
+                                                    <div class="card-header  rounded-4 p-2 d-flex justify-content-between align-items-center" id="headingTwo">
+                                                        <h5 class="mb-0">
+                                                            <button class="btn btn-link fw-bold p-0" data-bs-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                VALUE-ADDED TAX
+                                                            </button>
+                                                        </h5>
+                                                        <div>
+                                                            <span class="ms-2">
+                                                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/> <!-- Another Odoo tag field -->
+                                                            </span>
+                                                        </div>
+                                                        <button type="button" name="close_vat" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                    </div>
+                                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                        <div class="card-body p-3">
+                                                            <group>
+                                                                <field name="vat" string="Value-Added Tax"/>
+                                                                <field name="notes" string="Notes"/>
+                                                            </group>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </group>
+                                    <group>
+                                    
+                                        <!-- Last Check -->
+                                        <group invisible="hide_lastcheck == 'draft'">
+                                            <div id="accordion">
+                                                <div class="card rounded border-0">
+                                                    <div class="card-header rounded-4 p-2 d-flex justify-content-between align-items-center" id="headingThree">
+                                                        <h5 class="mb-0">
+                                                            <button class="btn btn-link fw-bold p-0" data-bs-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                                LAST CHECK
+                                                            </button>
+                                                        </h5>
+                                                        <div>
+                                                            <span class="ms-2">
+                                                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/> <!-- Another Odoo tag field -->
+                                                            </span>
+                                                        </div>
+                                                        <button type="button" name="close_lastcheck" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                    </div>
+                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                        <div class="card-body p-3">
+                                                            <group>
+                                                                <field name="last_check" id="last_check"/>
+                                                                <field name="notes" id="notes_lastcheck" string="Notes"/>
+                                                            </group>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </group>
 
-                                    <group invisible="hide_lastcheck == 'draft'">
-                                        <div id="accordion">
-                                            <div class="card">
-                                            <div class="card-body bg-secondary" id="headingOne">
-                                                <h5 class="mb-0">
-                                                    <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                        <h4 class="card-title">LAST CHECK</h4>
-                                                    </button>
-                                                </h5>
-                                            </div>
-
-                                                <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                                    <div class="card-body">
+                                        <!-- Salary -->
+                                        <group invisible="hide_salary == 'draft'">
+                                            <div id="accordion">
+                                                <div class="card rounded border-0">
+                                                    <div class="card-header rounded-4 p-2 d-flex justify-content-between align-items-center" id="headingFour">
+                                                        <h5 class="mb-0">
+                                                            <button class="btn btn-link fw-bold p-0" data-bs-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                SALARY
+                                                            </button>
+                                                        </h5>
+                                                        <div>
+                                                            <span class="ms-2">
+                                                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/> <!-- Another Odoo tag field -->
+                                                            </span>
+                                                        </div>
+                                                        <button type="button" name="close_salary" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                    </div>
+                                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                                                        <div class="card-body p-3">
                                                         <group>
-                                                            <field name="last_check"/>
-                                                            <field name="notes" string="Notes"/>
+                                                                <field name="salary" id="salary"/>
+                                                                <field name="notes" id="notes_salary" string="Notes"/>
                                                         </group>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </group>  
-                                                        <!--Salary-->
-                                    <group invisible="hide_salary == 'draft'">
-                                        <div id="accordion">
-                                            <div class="card">
-                                            <div class="card-body bg-secondary" id="headingOne">
-                                                <h5 class="mb-0">
-                                                    <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
-                                                        <h4 class="card-title">SALARY</h4>
-                                                    </button>
-                                                </h5>
-                                            </div>
-
-                                                <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <group>
-                                                            <field name="salary"/>
-                                                            <field name="notes" string="Notes"/>
-                                                        </group>
+                                        </group>
+                                    </group>    
+                                    <group>
+                                        <!-- Withdrawal -->
+                                        <group invisible="hide_withdrawal == 'draft'">
+                                            <div id="accordion">
+                                                <div class="card rounded border-0">
+                                                    <div class="card-header rounded-4 p-2 d-flex justify-content-between align-items-center" id="headingFive">
+                                                        <h5 class="mb-0">
+                                                            <button class="btn btn-link fw-bold p-0" data-bs-toggle="collapse" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                                                WITHDRAWAL
+                                                            </button>
+                                                        </h5>
+                                                        <div>
+                                                            <span class="ms-2">
+                                                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/> <!-- Another Odoo tag field -->
+                                                            </span>
+                                                        </div>
+                                                        <button type="button" name="close_withdrawal" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                    </div>
+                                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                                                        <div class="card-body p-3">
+                                                            <group>
+                                                                <field name="withdrwal" id="withdrawal"/>
+                                                                <field name="notes" id="notes_withdrawal" string="Notes"/>
+                                                            </group>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </group> 
-                                <!--withdrwal-->
-                                    <group invisible="hide_withdrawal == 'draft'">
-                                        <div id="accordion">
-                                            <div class="card">
-                                            <div class="card-body bg-secondary" id="headingOne">
-                                                <h5 class="mb-0">
-                                                    <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseFive" aria-expanded="true" aria-controls="collapseThree">
-                                                        <h4 class="card-title">WITHDRWAL</h4>
-                                                    </button>
-                                                </h5>
-                                            </div>
+                                        </group>
 
-                                                <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <group>
-                                                            <field name="withdrwal"/>
-                                                            <field name="notes" string="Notes"/>
-                                                        </group>
+                                        <!-- Real Estate -->
+                                        <group invisible="hide_realestate == 'draft'">
+                                            <div id="accordion">
+                                                <div class="card rounded border-0">
+                                                    <div class="card-header rounded-4 p-2 d-flex justify-content-between align-items-center" id="headingSix">
+                                                        <h5 class="mb-0">
+                                                            <button class="btn btn-link fw-bold p-0" data-bs-toggle="collapse" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                REAL ESTATE
+                                                            </button>
+                                                        </h5>
+                                                        <div>
+                                                            <span class="ms-2">
+                                                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/> <!-- Another Odoo tag field -->
+                                                            </span>
+                                                        </div>
+                                                        <button type="button" name="close_realestate" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                    </div>
+                                                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                                                        <div class="card-body p-3">
+                                                            <group>
+                                                                <field name="realestate" id="realestate"/>
+                                                                <field name="notes" id="notes_realestate" string="Notes"/>
+                                                            </group>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </group> 
-                                <!--RealEstate-->
-                                    <group invisible="hide_realestate == 'draft'">
-                                        <div id="accordion">
-                                            <div class="card">
-                                            <div class="card-body bg-secondary" id="headingOne">
-                                                <h5 class="mb-0">
-                                                    <button class="btn btn-link" data-bs-toggle="collapse" href="#collapseSix" aria-expanded="true" aria-controls="collapseThree">
-                                                        <h4 class="card-title">REALSTATE</h4>
-                                                    </button>
-                                                </h5>
-                                            </div>
-
-                                                <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <group>
-                                                            <field name="realestate"/>
-                                                            <field name="notes" string="Notes"/>
-                                                        </group>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </group> 
-                                <group>
-                                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                                </group>  
+                                        </group>  
+                                    </group>    
                             </sheet>    
             </form>
         </field>
@@ -177,8 +203,7 @@
                 <field name="name"/>
                 <field name="state" decoration-info="state == 'in_progress'" decoration-success="state == 'done'" widget="badge" />
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                <field name="due_date"/>
-                <button name="mark_done" type="object" string="Done" class="btn btn-link" icon="fa-check"/>
+                <button name="finish_task_for_vat" type="object" string="Done" class="btn btn-link" icon="fa-check"/>
             </list>
         </field>
     </record>

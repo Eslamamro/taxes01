@@ -117,7 +117,6 @@ class taxes01(models.Model):
     email = fields.Char(string='Email1')
     password = fields.Char(string='Password1', required=False, help="Password for the user")
     password2 = fields.Char(string='Password2', required=False, help="Password for the user")
-    tag_ids = fields.Many2many('task.tag')
     tax_id = fields.Char(string='Tax ID')
     
     def _schedule_activity_every_month(self):
@@ -130,8 +129,10 @@ class taxes01(models.Model):
             self.env['mail.activity'].create({
                 'res_model_id': self.env['ir.model']._get_id(self._name),
                 'res_id': record.id,
+                'res_name': self.name if self.name else "Unknown Client",
                 'activity_type_id': activity_type.id,
                 'summary': 'Follow up for confirmation',
+                'note': 'Vat Activityt',
                 'date_deadline': today.replace(day=24),  # Always set to the 24th of the current month
                 'user_id': self.env.user.id,  # Assigned to the current user
             })
@@ -480,15 +481,38 @@ class Task(models.Model):
     vat = fields.Many2one('taxes01.vat', string='vat')
     phone = fields.Char(string='Phone')
     tax_id = fields.Char(string='Tax ID')
-    due_date = fields.Date(string="Due Date", required=True, default=lambda self: fields.Date.today())
     state = fields.Selection([
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),
         ('done', 'Done'),
     ], string='Status', default='draft', track_visibility='onchange', required=True)
         
+    tag_ids = fields.Many2many('task.tag', default=lambda self: self._get_default_tags())
+    @api.model
+    def _get_default_tags(self):
+        # Get the 'Review' tag ID
+        review_tag = self.env['task.tag'].search([('name', '=', 'Review')], limit=1)
+        return review_tag and review_tag.ids or []
+    
 
-    def donothing(self):
+    def finish_task_for_vat(self):
+
+        for task in self:
+            # End activities linked to the associated taxes01.taxes01 record
+            if task.name:  # Assuming 'name' is a Many2one to 'taxes01.taxes01'
+                taxes01_activities = self.env['mail.activity'].search([
+                    ('res_model', '=', 'taxes01.taxes01'),
+                    ('res_id', '=', task.name.id),
+                    ('note', '=', 'Vat Activityt')
+                ])
+                taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',  # Reload the form view to reflect changes
+        }
+
+    def close_card():
         pass
 
     def mark_done(self):
@@ -516,42 +540,6 @@ class Task(models.Model):
             'type': 'ir.actions.client',
             'tag': 'reload',  # Reload the form view to reflect changes
         }
-
-    def create_activity(self):
-        """Creates a new activity and subscribes relevant partners to the task."""
-        for task in self:
-            if not task.due_date:
-                raise ValidationError(_("The task must have a Due Date to create an activity."))
-
-            # Get the activity type (To-Do)
-            activity_type = self.env.ref('mail.mail_activity_data_todo', raise_if_not_found=False)
-            if not activity_type:
-                raise ValidationError(_("The 'To-Do' activity type is missing. Please configure activity types."))
-
-            # Fetch the Document Model (res_model_id)
-            model_id = self.env['ir.model'].search([('model', '=', self._name)], limit=1)
-            if not model_id:
-                raise ValidationError(_("The model '%s' is not properly configured in Odoo.") % self._name)
-
-            # Create the activity
-            activity = self.env['mail.activity'].create({
-                'res_model_id': model_id.id,  # Use the model's ID, not its name
-                'res_id': task.id,  # Link to the specific task record
-                'activity_type_id': activity_type.id,  # To-Do activity type
-                'summary': f"Task State Update: {task.state}",  # Add task state to summary
-                'date_deadline': task.due_date,  # Set activity deadline to task's due date
-
-            })
-
-            # Optionally, subscribe followers (if required)
-            partner_ids = []  # Add partner IDs if needed
-            if partner_ids:
-                task.message_subscribe(partner_ids=partner_ids)
-
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'reload',  # Reload the form view to reflect changes
-            }
 
     @api.model
     def action_open_wizard_func(self):
@@ -717,5 +705,3 @@ class TaskTag(models.Model):
     def init(self):
         """Automatically create default tags when the module is installed."""
         self._create_default_tags()
-
-
