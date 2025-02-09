@@ -69,6 +69,46 @@
         <field name="perm_unlink" eval="1"/>
     </record>
 
+    <record id="access_salary_name_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_salary_name"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="access_withdrwal_name_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_withdrwal_name"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="access_realestate_name_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_realestate_name"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="access_stamp_admin" model="ir.model.access">
+        <field name="name">Taxes User Access</field>
+        <field name="model_id" ref="model_stamp"/>
+        <field name="group_id" ref="tax_category_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
             <!-- Access Rules for Tags Admin -->
     <record id="access_tags_admin" model="ir.model.access">
         <field name="name">Taxes User Access</field>

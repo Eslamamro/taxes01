@@ -7,9 +7,6 @@
     <field name="model">taxes01.taxes01</field>
     <field name="arch" type="xml">
         <form string="My Form">
-            <div class="container" style="padding: 20px;">
-                <div class="row">
-                    <div class="col-12">
                         <sheet>
                             <h1 class="d-flex flex-row align-items-center">
                               <field name="name" default_focus="1" placeholder="Client name" style="font-size: min(4vw, 2.2rem);" />
@@ -51,31 +48,28 @@
                             </group>
                             <br/>
    
-                        </sheet>
+                        
+                            <notebook>
+                              <page string="Client Additions"> 
+                                  <group>
+                                  <group> 
+                                      <field name="vat_dropmenue"/>
+                                      <field name="vat_date" invisible="vat_dropmenue == 'draft'"/>
+                                      <field name="income_dropmenue"/>
+                                      <field name="salary_dropmenue"/>
+                                      <field name="salary_duration" invisible="salary_dropmenue == 'draft'"/>
+                                  </group>
 
-                <sheet>
-                    <h1>Client Additions - اضافات العميل</h1>
-                     <group>
-                    <group> 
-                        <field name="vat_dropmenue"/>
-                        <field name="vat_date" invisible="vat_dropmenue == 'draft'"/>
-                        <field name="income_dropmenue"/>
-                        <field name="salary_dropmenue"/>
-                        <field name="salary_duration" invisible="salary_dropmenue == 'draft'"/>
-                    </group>
-
-                    <group>
-                        <field name="lastcheck_dropmenue"/>
-                        <field name="withdrawal_dropmenue"/>
-                        <field name="withdrwal_month_select" string="Select Month" invisible="withdrawal_dropmenue == 'draft'"/>
-                        <field name="real_estate_tax_dropmenue" string="Real Estate Tax"/>
-                        <field name="stamp_dropmenue" string="stamp"/>
-                    </group>
-                    </group>
-                </sheet>
-              </div>
-            </div>
-          </div>
+                                  <group>
+                                      <field name="withdrawal_dropmenue"/>
+                                      <field name="withdrwal_month_select" string="Select Month" invisible="withdrawal_dropmenue == 'draft'"/>
+                                      <field name="real_estate_tax_dropmenue" string="Real Estate Tax"/>
+                                      <field name="stamp_dropmenue" string="stamp"/>
+                                  </group>
+                                  </group>
+                              </page>
+                            </notebook> 
+                      </sheet>
         </form>
     </field>
 </record>
