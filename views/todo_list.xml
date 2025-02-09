@@ -204,7 +204,6 @@
             <list string="Task List" default_group_by="state">
                 <field name="name"/>
                 <field name="state" decoration-info="state == 'in_progress'" decoration-success="state == 'done'" widget="badge" />
-                <button name="finish_task_for_vat" type="object" string="Done" class="btn btn-link" icon="fa-check"/>
             </list>
         </field>
     </record>

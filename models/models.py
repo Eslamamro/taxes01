@@ -626,33 +626,6 @@ class Task(models.Model):
             'tag': 'reload',  # Reload the form view to reflect changes
         }
 
-    def mark_done(self):
-        """Mark the task as 'Done' and remove associated activities."""
-        for task in self:
-            # Update the task's state to "Done"
-            task.write({'state': 'done'})
-
-            # Search for activities linked to this task and unlink them
-            task_activities = self.env['mail.activity'].search([
-                ('res_model', '=', 'task.task'),
-                ('res_id', '=', task.id)
-            ])
-            task_activities.sudo().unlink()  # Remove associated activities from the chatter
-
-            # End activities linked to the associated taxes01.taxes01 record
-            if task.name:  # Assuming 'name' is a Many2one to 'taxes01.taxes01'
-                taxes01_activities = self.env['mail.activity'].search([
-                    ('res_model', '=', 'taxes01.taxes01'),
-                    ('res_id', '=', task.name.id)
-                ])
-                taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
-                
-
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',  # Reload the form view to reflect changes
-        }
-
     @api.model
     def action_open_wizard_func(self):
 
