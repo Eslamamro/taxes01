@@ -518,15 +518,6 @@ class Task(models.Model):
         ('done', 'Done'),
     ], string='Status', default='draft', track_visibility='onchange', required=True)
         
-    # tag_ids = fields.Many2many('task.tag', default=lambda self: self._get_default_tags())
-
-    @api.model
-    def _get_default_tags(self):
-        # Get the 'Review' tag ID
-        review_tag = self.env['task.tag'].search([('name', '=', 'Review')], limit=1)
-        return review_tag and review_tag.ids or []
-    
-
     def finish_task_for_vat(self):
 
         for task in self:
