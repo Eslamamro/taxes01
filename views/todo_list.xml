@@ -26,15 +26,15 @@
                                                                 INCOME
                                                             </button>
                                                         </h5>
-                                                        <button type="button" name="finish_task_for_income" class="btn-close btn-close-check" aria-label="Close"></button>
+                                                        <button type="object" name="finish_task_for_income" class="btn-close btn-close-check" aria-label="Close"></button>
                                                     </div>
                                                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                                         <div class="card-body p-3">
                                                             <group>
-                                                                <field name="income" string="income"/>
-                                                                <field name="note1" string="Notes"/>
+                                                                <field name="income" string="income" readonly="readnoly_income == True"/>
+                                                                <field name="note1" string="Notes" readonly="readnoly_income == True"/>
                                                             </group>
-                                                            <button name="finish_task_for_income" type="object" string="Done" class="btn btn-primary float-end"/>
+                                                            <button name="icome_done" type="object" string="Done" class="btn btn-primary float-end"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -56,10 +56,11 @@
                                                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                                         <div class="card-body p-3">
                                                             <group>
-                                                                <field name="vat" string="Value-Added Tax"/>
-                                                                <field name="note2" string="Notes"/>
+                                                                <field name="vat" string="Value-Added Tax"  readonly="readnoly_vat == True"/>
+                                                                <field name="note2" string="Notes"  readonly="readnoly_vat == True"/>
+                                                                <field name="vat_date" string="Date" readonly="readnoly_vat == True"/>
                                                             </group>
-                                                            <button name="finish_task_for_vat" type="object" string="Done" class="btn btn-primary float-end"/>
+                                                            <button name="vat_done" type="object" string="Done" class="btn btn-primary float-end"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,15 +103,15 @@
                                                                 WITHDRAWAL
                                                             </button>
                                                         </h5>
-                                                        <button type="button" name="finish_task_for_withdrwal" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                        <button type="object" name="finish_task_for_withdrwal" class="btn-close btn-close-black" aria-label="Close"></button>
                                                     </div>
                                                     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                                                         <div class="card-body p-3">
                                                             <group>
-                                                                <field name="withdrwal" id="withdrawal"/>
-                                                                <field name="note5" id="notes_withdrawal" string="Notes"/>
+                                                                <field name="withdrwal" id="withdrawal" readonly="readnoly_withdrawal == True"/>
+                                                                <field name="note5" id="notes_withdrawal" string="Notes" readonly="readnoly_withdrawal == True"/>
                                                             </group>
-                                                            <button name="finish_task_for_withdrwal" type="object" string="Done" class="btn btn-primary float-end"/>
+                                                            <button name="withdrwal_done" type="object" string="Done" class="btn btn-primary float-end"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -127,15 +128,15 @@
                                                                 SALARY
                                                             </button>
                                                         </h5>
-                                                        <button type="button" name="finish_task_for_salary" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                        <button type="object" name="finish_task_for_salary" class="btn-close btn-close-black" aria-label="Close"></button>
                                                     </div>
                                                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                                                         <div class="card-body p-3">
                                                         <group>
-                                                                <field name="salary" id="salary"/>
-                                                                <field name="note4" id="notes_salary" string="Notes"/>
+                                                                <field name="salary" id="salary" readonly="readnoly_salary == True"/>
+                                                                <field name="note4" id="notes_salary" string="Notes" readonly="readnoly_salary == True"/>
                                                         </group>
-                                                        <button name="finish_task_for_salary" type="object" string="Done" class="btn btn-primary float-end"/>
+                                                        <button name="salary_done" type="object" string="Done" class="btn btn-primary float-end"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -152,15 +153,15 @@
                                                                 STAMP
                                                             </button>
                                                         </h5>
-                                                        <button type="button" name="finish_task_for_stamp" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                        <button type="object" name="finish_task_for_stamp" class="btn-close btn-close-black" aria-label="Close"></button>
                                                     </div>
                                                     <div id="collapseSeven" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
                                                         <div class="card-body p-3">
                                                             <group>
-                                                                <field name="stamp" id="stamp"/>
-                                                                <field name="note7" id="notes_stamp" string="Notes"/>
+                                                                <field name="stamp" id="stamp" readonly="readnoly_stamp == True"/>
+                                                                <field name="note7" id="notes_stamp" string="Notes" readonly="readnoly_stamp == True"/>
                                                             </group>
-                                                            <button name="finish_task_for_stamp" type="object" string="Done" class="btn btn-primary float-end"/>
+                                                            <button name="stamp_done" type="object" string="Done" class="btn btn-primary float-end"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,15 +177,15 @@
                                                                 REAL ESTATE
                                                             </button>
                                                         </h5>
-                                                        <button type="button" name="finish_task_for_real_state_tax" class="btn-close btn-close-black" aria-label="Close"></button>
+                                                        <button type="object" name="finish_task_for_real_state_tax" class="btn-close btn-close-black" aria-label="Close"></button>
                                                     </div>
                                                     <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
                                                         <div class="card-body p-3">
                                                             <group>
-                                                                <field name="realestate" id="realestate"/>
-                                                                <field name="note6" id="notes_realestate" string="Notes"/>
+                                                                <field name="realestate" id="realestate" readonly="readnoly_realstate == True"/>
+                                                                <field name="note6" id="notes_realestate" string="Notes" readonly="readnoly_realstate == True"/>
                                                             </group>
-                                                            <button name="finish_task_for_real_state_tax" type="object" string="Done" class="btn btn-primary float-end"/>
+                                                            <button name="real_state_done" type="object" string="Done" class="btn btn-primary float-end"/>
                                                         </div>
                                                     </div>
                                                 </div>

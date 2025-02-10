@@ -36,7 +36,8 @@ class taxes01(models.Model):
             ('confirmed', 'Confirmed'),
             ('done', 'Done'),
         ],
-        string='vat',
+        default='draft',
+        string='vat'
         )
     vat_date = fields.Date(string='Date')
     income_dropmenue = fields.Selection(
@@ -150,7 +151,13 @@ class taxes01(models.Model):
                 self.env['task.task'].create({
                     'name': record.id,  # Reference the record ID for Many2one
                     'state': 'in_progress',  # Default state
-                    'notes': '',  # Optional default value
+                    'note1': '',  # Optional default value
+                    'note2': '',  # Optional default value
+                    'note3': '',  # Optional default value
+                    'note4': '',  # Optional default value
+                    'note5': '',  # Optional default value
+                    'note6': '',  # Optional default value
+                    'note7': '',  # Optional default value
                     'income': None,  # Optional if no income field
                     'vat': None,  # Optional if no vat field
                     'phone': record.phone or '',  # Use phone if available, or empty
@@ -193,7 +200,13 @@ class taxes01(models.Model):
                 self.env['task.task'].create({
                     'name': record.id,  # Reference the record ID for Many2one
                     'state': 'in_progress',  # Default state
-                    'notes': '',  # Optional default value
+                    'note1': '',  # Optional default value
+                    'note2': '',  # Optional default value
+                    'note3': '',  # Optional default value
+                    'note4': '',  # Optional default value
+                    'note5': '',  # Optional default value
+                    'note6': '',  # Optional default value
+                    'note7': '',  # Optional default value
                     'income': None,  # Optional if no income field
                     'vat': None,  # Optional if no vat field
                     'phone': record.phone or '',  # Use phone if available, or empty
@@ -230,14 +243,20 @@ class taxes01(models.Model):
                 self.env['task.task'].create({
                     'name': record.id,  # Reference the record ID for Many2one
                     'state': 'in_progress',  # Default state
-                    'notes': '',  # Optional default value
+                    'note1': '',  # Optional default value
+                    'note2': '',  # Optional default value
+                    'note3': '',  # Optional default value
+                    'note4': '',  # Optional default value
+                    'note5': '',  # Optional default value
+                    'note6': '',  # Optional default value
+                    'note7': '',  # Optional default value
                     'income': None,  # Optional if no income field
                     'vat': None,  # Optional if no vat field
                     'phone': record.phone or '',  # Use phone if available, or empty
                     'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
                 })
     
-    def schedule_activities_for_jan_mar_20(self):
+    def schedule_activities_for_jan_mar_20(self, vat_category):
         """Schedules activities for December 10 of the current year."""
         # Get the current year
         current_year = datetime.now().year
@@ -246,12 +265,13 @@ class taxes01(models.Model):
 
         for record in self:
             # Create an activity for each record in the current set
+            note = 'withdrwal Activity' if vat_category == 'withdrwal' else 'General Activity'
             self.env['mail.activity'].create({
                 'res_model_id': self.env['ir.model']._get(self._name).id,  # Get the model ID dynamically
                 'res_id': record.id,  # Attach the activity to the specific record
                 'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,  # Default TODO activity type
                 'summary': 'Follow-up for December 10',  # A short description
-                'note': 'This is a scheduled activity for December 10.',  # A detailed note
+                'note': note,  # A detailed note
                 'date_deadline': target_date,  # Set the deadline to December 10
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
@@ -265,14 +285,20 @@ class taxes01(models.Model):
                 self.env['task.task'].create({
                     'name': record.id,  # Reference the record ID for Many2one
                     'state': 'in_progress',  # Default state
-                    'notes': '',  # Optional default value
+                    'note1': '',  # Optional default value
+                    'note2': '',  # Optional default value
+                    'note3': '',  # Optional default value
+                    'note4': '',  # Optional default value
+                    'note5': '',  # Optional default value
+                    'note6': '',  # Optional default value
+                    'note7': '',  # Optional default value
                     'income': None,  # Optional if no income field
                     'vat': None,  # Optional if no vat field
                     'phone': record.phone or '',  # Use phone if available, or empty
                     'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
                 })
 
-    def schedule_activities_for_apr_jun_20(self):
+    def schedule_activities_for_apr_jun_20(self, vat_category):
         """Schedules activities for December 10 of the current year."""
         # Get the current year
         current_year = datetime.now().year
@@ -281,12 +307,13 @@ class taxes01(models.Model):
 
         for record in self:
             # Create an activity for each record in the current set
+            note = 'withdrwal Activity' if vat_category == 'withdrwal' else 'General Activity'
             self.env['mail.activity'].create({
                 'res_model_id': self.env['ir.model']._get(self._name).id,  # Get the model ID dynamically
                 'res_id': record.id,  # Attach the activity to the specific record
                 'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,  # Default TODO activity type
                 'summary': 'Follow-up for December 10',  # A short description
-                'note': 'This is a scheduled activity for December 10.',  # A detailed note
+                'note': note,  # A detailed note
                 'date_deadline': target_date,  # Set the deadline to December 10
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
@@ -300,14 +327,20 @@ class taxes01(models.Model):
                 self.env['task.task'].create({
                     'name': record.id,  # Reference the record ID for Many2one
                     'state': 'in_progress',  # Default state
-                    'notes': '',  # Optional default value
+                    'note1': '',  # Optional default value
+                    'note2': '',  # Optional default value
+                    'note3': '',  # Optional default value
+                    'note4': '',  # Optional default value
+                    'note5': '',  # Optional default value
+                    'note6': '',  # Optional default value
+                    'note7': '',  # Optional default value
                     'income': None,  # Optional if no income field
                     'vat': None,  # Optional if no vat field
                     'phone': record.phone or '',  # Use phone if available, or empty
                     'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
                 })
 
-    def schedule_activities_for_jul_sep_20(self):
+    def schedule_activities_for_jul_sep_20(self, vat_category):
         """Schedules activities for December 10 of the current year."""
         # Get the current year
         current_year = datetime.now().year
@@ -316,12 +349,13 @@ class taxes01(models.Model):
 
         for record in self:
             # Create an activity for each record in the current set
+            note = 'withdrwal Activity' if vat_category == 'withdrwal' else 'General Activity'
             self.env['mail.activity'].create({
                 'res_model_id': self.env['ir.model']._get(self._name).id,  # Get the model ID dynamically
                 'res_id': record.id,  # Attach the activity to the specific record
                 'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,  # Default TODO activity type
                 'summary': 'Follow-up for December 10',  # A short description
-                'note': 'This is a scheduled activity for December 10.',  # A detailed note
+                'note': note,  # A detailed note
                 'date_deadline': target_date,  # Set the deadline to December 10
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
@@ -335,14 +369,20 @@ class taxes01(models.Model):
                 self.env['task.task'].create({
                     'name': record.id,  # Reference the record ID for Many2one
                     'state': 'in_progress',  # Default state
-                    'notes': '',  # Optional default value
+                    'note1': '',  # Optional default value
+                    'note2': '',  # Optional default value
+                    'note3': '',  # Optional default value
+                    'note4': '',  # Optional default value
+                    'note5': '',  # Optional default value
+                    'note6': '',  # Optional default value
+                    'note7': '',  # Optional default value
                     'income': None,  # Optional if no income field
                     'vat': None,  # Optional if no vat field
                     'phone': record.phone or '',  # Use phone if available, or empty
                     'tax_id': record.tax_id or '',  # Use tax_id if available, or empty
                 })
 
-    def schedule_activities_for_oct_dec_20(self):
+    def schedule_activities_for_oct_dec_20(self, vat_category):
         """Schedules activities for December 10 of the current year."""
         # Get the current year
         current_year = datetime.now().year
@@ -351,12 +391,13 @@ class taxes01(models.Model):
 
         for record in self:
             # Create an activity for each record in the current set
+            note = 'withdrwal Activity' if vat_category == 'withdrwal' else 'General Activity'
             self.env['mail.activity'].create({
                 'res_model_id': self.env['ir.model']._get(self._name).id,  # Get the model ID dynamically
                 'res_id': record.id,  # Attach the activity to the specific record
                 'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,  # Default TODO activity type
                 'summary': 'Follow-up for December 10',  # A short description
-                'note': 'This is a scheduled activity for December 10.',  # A detailed note
+                'note': note,  # A detailed note
                 'date_deadline': target_date,  # Set the deadline to December 10
                 'user_id': self.env.user.id,  # Assign the activity to the current user
             })
@@ -370,7 +411,13 @@ class taxes01(models.Model):
                 self.env['task.task'].create({
                     'name': record.id,  # Reference the record ID for Many2one
                     'state': 'in_progress',  # Default state
-                    'notes': '',  # Optional default value
+                    'note1': '',  # Optional default value
+                    'note2': '',  # Optional default value
+                    'note3': '',  # Optional default value
+                    'note4': '',  # Optional default value
+                    'note5': '',  # Optional default value
+                    'note6': '',  # Optional default value
+                    'note7': '',  # Optional default value
                     'income': None,  # Optional if no income field
                     'vat': None,  # Optional if no vat field
                     'phone': record.phone or '',  # Use phone if available, or empty
@@ -386,7 +433,7 @@ class taxes01(models.Model):
         # Determine vat_category based on drop-down values
         vat_category = 'vat' if vals.get('vat_dropmenue') == 'confirmed' else \
                 'salary' if vals.get('salary_dropmenue') == 'confirmed' else \
-                'withdrwal' if vals.get('withdrwal_month_select') == 'confirmed' else \
+                'withdrwal' if vals.get('withdrawal_dropmenue') == 'confirmed' else \
                 'income' if vals.get('income_dropmenue') == 'confirmed' else \
                 'real state tax' if vals.get('real_estate_tax_dropmenue') == 'confirmed' else \
                 'stamp' if vals.get('stamp_dropmenue') == 'confirmed' else 'None'
@@ -402,14 +449,16 @@ class taxes01(models.Model):
             record.schedule_quarterly_activities(vat_category)
         if vals.get('salary_dropmenue') == 'confirmed' and vals.get('salary_duration') == 'yearly':
             record.schedule_activities_for_december_10(vat_category)
-        if vals.get('withdrwal_month_select') == 'jan-mar':
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'jan-mar':
             record.schedule_activities_for_jan_mar_20(vat_category)
-        if vals.get('withdrwal_month_select') == 'apr-jun':
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'apr-jun':
             record.schedule_activities_for_apr_jun_20(vat_category)
-        if vals.get('withdrwal_month_select') == 'jul-sep':
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'jul-sep':
             record.schedule_activities_for_jul_sep_20(vat_category)
-        if vals.get('withdrwal_month_select') == 'oct-dec':
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'oct-dec':
             record.schedule_activities_for_oct_dec_20(vat_category)
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == None:
+            record.schedule_quarterly_activities(vat_category)
         if vals.get('real_estate_tax_dropmenue') == 'confirmed':
             record.schedule_activities_for_december_10(vat_category)
         if vals.get('stamp_dropmenue') == 'confirmed':
@@ -426,7 +475,7 @@ class taxes01(models.Model):
         # Determine vat_category based on drop-down values
         vat_category = 'vat' if vals.get('vat_dropmenue') == 'confirmed' else \
                 'salary' if vals.get('salary_dropmenue') == 'confirmed' else \
-                'withdrwal' if vals.get('withdrwal_month_select') == 'confirmed' else \
+                'withdrwal' if vals.get('withdrawal_dropmenue') == 'confirmed' else \
                 'income' if vals.get('income_dropmenue') == 'confirmed' else \
                 'real state tax' if vals.get('real_estate_tax_dropmenue') == 'confirmed' else \
                 'stamp' if vals.get('stamp_dropmenue') == 'confirmed' else 'None'
@@ -440,14 +489,14 @@ class taxes01(models.Model):
             self._schedule_activity_every_month(vat_category)
         if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'jan-mar':
             self.schedule_activities_for_jan_mar_20(vat_category)
-        if vals.get('withdrwal_month_select') == 'jan-mar':
-            self.schedule_activities_for_jan_mar_20(vat_category)
-        elif vals.get('withdrwal_month_select') == 'apr-jun':
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'apr-jun':
             self.schedule_activities_for_apr_jun_20(vat_category)
-        elif vals.get('withdrwal_month_select') == 'jul-sep':
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'jul-sep':
             self.schedule_activities_for_jul_sep_20(vat_category)
-        elif vals.get('withdrwal_month_select') == 'oct-dec':
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == 'oct-dec':
             self.schedule_activities_for_oct_dec_20(vat_category)
+        if vals.get('withdrawal_dropmenue') == 'confirmed' and vals.get('withdrwal_month_select') == None:
+            self.schedule_quarterly_activities(vat_category)
         if vals.get('real_estate_tax_dropmenue') == 'confirmed':
             self.schedule_activities_for_december_10(vat_category)
         if vals.get('stamp_dropmenue') == 'confirmed':
@@ -492,7 +541,7 @@ class Task(models.Model):
     note5 = fields.Html(string='Notes')
     note6 = fields.Html(string='Notes')
     note7 = fields.Html(string='Notes')
-    
+    vat_date = fields.Date(related="name.vat_date", readonly=0)
     upload = fields.Binary()
     income = fields.Many2one('taxes01.income', string='Income')
     salary = fields.Many2one('salary.name', string='Salary') 
@@ -502,12 +551,19 @@ class Task(models.Model):
     last_check = fields.Many2one('last.check', string='Last check')
 # hiding and showing in the todo xml if draft it will vanish
     hide_vat = fields.Selection(related="name.vat_dropmenue")
+    readnoly_vat = fields.Boolean()
     hide_income = fields.Selection(related="name.income_dropmenue")
+    readnoly_income = fields.Boolean()
     hide_lastcheck = fields.Selection(related="name.lastcheck_dropmenue")
+    readnoly_lastcheck = fields.Boolean()
     hide_salary = fields.Selection(related="name.salary_dropmenue")
+    readnoly_salary = fields.Boolean()
     hide_withdrawal = fields.Selection(related="name.withdrawal_dropmenue")
+    readnoly_withdrawal = fields.Boolean()
     hide_realestate = fields.Selection(related="name.real_estate_tax_dropmenue")
+    readnoly_realstate = fields.Boolean()
     hide_stamp = fields.Selection(related="name.stamp_dropmenue")
+    readnoly_stamp = fields.Boolean()
     
     vat = fields.Many2one('taxes01.vat', string='vat')
     phone = fields.Char(string='Phone')
@@ -517,7 +573,26 @@ class Task(models.Model):
         ('in_progress', 'In Progress'),
         ('done', 'Done'),
     ], string='Status', default='draft', track_visibility='onchange', required=True)
-        
+
+      
+    def vat_done(self):
+        for task in self:
+            # End activities linked to the associated taxes01.taxes01 record
+            if task.name:  # Assuming 'name' is a Many2one to 'taxes01.taxes01'
+                taxes01_activities = self.env['mail.activity'].search([
+                    ('res_model', '=', 'taxes01.taxes01'),
+                    ('res_id', '=', task.name.id),
+                    ('note', '=', 'VAT Activity')
+                ])
+                taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
+
+        self.readnoly_vat = True 
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',  # Reload the form view to reflect changes
+            
+        }
+
     def finish_task_for_vat(self):
 
         for task in self:
@@ -530,12 +605,30 @@ class Task(models.Model):
                 ])
                 taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
                 task.name.vat_dropmenue = 'draft'
-
+        
         return {
             'type': 'ir.actions.client',
             'tag': 'reload',  # Reload the form view to reflect changes
         }
 
+
+    def salary_done(self):
+        for task in self:
+            # End activities linked to the associated taxes01.taxes01 record
+            if task.name:  # Assuming 'name' is a Many2one to 'taxes01.taxes01'
+                taxes01_activities = self.env['mail.activity'].search([
+                    ('res_model', '=', 'taxes01.taxes01'),
+                    ('res_id', '=', task.name.id),
+                    ('note', '=', 'Salary Activity')
+                ])
+                taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
+
+        self.readnoly_salary = True 
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',  # Reload the form view to reflect changes
+        }  
+    
     def finish_task_for_salary(self):
 
         for task in self:
@@ -554,6 +647,24 @@ class Task(models.Model):
             'tag': 'reload',  # Reload the form view to reflect changes
         }
 
+
+    def withdrwal_done(self):
+        for task in self:
+            # End activities linked to the associated taxes01.taxes01 record
+            if task.name:  # Assuming 'name' is a Many2one to 'taxes01.taxes01'
+                taxes01_activities = self.env['mail.activity'].search([
+                    ('res_model', '=', 'taxes01.taxes01'),
+                    ('res_id', '=', task.name.id),
+                    ('note', '=', 'withdrwal Activity')
+                ])
+                taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
+
+        self.readnoly_withdrawal = True 
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',  # Reload the form view to reflect changes
+        } 
+
     def finish_task_for_withdrwal(self):
 
         for task in self:
@@ -566,12 +677,29 @@ class Task(models.Model):
                 ])
                 taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
                 task.name.withdrawal_dropmenue = 'draft'
+        
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',  # Reload the form view to reflect changes
+        } 
+    
+    def icome_done(self):
+        for task in self:
+            # End activities linked to the associated taxes01.taxes01 record
+            if task.name:  # Assuming 'name' is a Many2one to 'taxes01.taxes01'
+                taxes01_activities = self.env['mail.activity'].search([
+                    ('res_model', '=', 'taxes01.taxes01'),
+                    ('res_id', '=', task.name.id),
+                    ('note', '=', 'income Activity')
+                ])
+                taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
+        self.readnoly_income = True 
 
         return {
             'type': 'ir.actions.client',
             'tag': 'reload',  # Reload the form view to reflect changes
-        }    
-    
+        }
+
     def finish_task_for_income(self):
 
         for task in self:
@@ -589,7 +717,25 @@ class Task(models.Model):
             'type': 'ir.actions.client',
             'tag': 'reload',  # Reload the form view to reflect changes
         }
-    
+
+
+    def real_state_done(self):
+        for task in self:
+            # End activities linked to the associated taxes01.taxes01 record
+            if task.name:  # Assuming 'name' is a Many2one to 'taxes01.taxes01'
+                taxes01_activities = self.env['mail.activity'].search([
+                    ('res_model', '=', 'taxes01.taxes01'),
+                    ('res_id', '=', task.name.id),
+                    ('note', '=', 'Real State Tax Activity')
+                ])
+                taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
+
+        self.readnoly_realstate = True 
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',  # Reload the form view to reflect changes
+        }
+
     def finish_task_for_real_state_tax(self):
 
         for task in self:
@@ -607,7 +753,24 @@ class Task(models.Model):
             'type': 'ir.actions.client',
             'tag': 'reload',  # Reload the form view to reflect changes
         }
-    
+
+
+    def stamp_done(self):
+        for task in self:
+            # End activities linked to the associated taxes01.taxes01 record
+            if task.name:  # Assuming 'name' is a Many2one to 'taxes01.taxes01'
+                taxes01_activities = self.env['mail.activity'].search([
+                    ('res_model', '=', 'taxes01.taxes01'),
+                    ('res_id', '=', task.name.id),
+                    ('note', '=', 'Stamp Activity')
+                ])
+                taxes01_activities.sudo().unlink()  # Remove associated activities from the chatter
+        self.readnoly_stamp = True 
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',  # Reload the form view to reflect changes
+        }
+
     def finish_task_for_stamp(self):
 
         for task in self:
@@ -727,6 +890,12 @@ class Salary(models.Model):
             if not self.search([('name', '=', record['name'])]):
                 self.create(record)
 
+    @api.model
+    def init(self):
+        """Automatically create default records when the module is installed."""
+        self._create_default_records()
+
+
 class  Withdrwal(models.Model):
     _name = 'withdrwal.name'
     _description = 'Withdrwal Details'
@@ -745,6 +914,12 @@ class  Withdrwal(models.Model):
         for record in default_records:
             if not self.search([('name', '=', record['name'])]):
                 self.create(record)
+
+    @api.model
+    def init(self):
+        """Automatically create default records when the module is installed."""
+        self._create_default_records()
+
 
 class  RealEstate(models.Model):
     _name = 'realestate.name'
@@ -765,6 +940,11 @@ class  RealEstate(models.Model):
             if not self.search([('name', '=', record['name'])]):
                 self.create(record)
 
+    @api.model
+    def init(self):
+        """Automatically create default records when the module is installed."""
+        self._create_default_records()
+    
 
 class  Stamp(models.Model):
     _name = 'stamp'
@@ -784,6 +964,11 @@ class  Stamp(models.Model):
         for record in default_records:
             if not self.search([('name', '=', record['name'])]):
                 self.create(record)
+
+    @api.model
+    def init(self):
+        """Automatically create default records when the module is installed."""
+        self._create_default_records()
 
 
 class TaskTag(models.Model):
