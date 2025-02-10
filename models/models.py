@@ -34,7 +34,6 @@ class taxes01(models.Model):
         [
             ('draft', 'Draft'),
             ('confirmed', 'Confirmed'),
-            ('done', 'Done'),
         ],
         default='draft',
         string='vat'
@@ -44,7 +43,6 @@ class taxes01(models.Model):
         [
             ('draft', 'Draft'),
             ('confirmed', 'Confirmed'),
-            ('done', 'Done'),
         ],
         string='income',
         default='draft'
@@ -53,7 +51,6 @@ class taxes01(models.Model):
         [
             ('draft', 'Draft'),
             ('confirmed', 'Confirmed'),
-            ('done', 'Done'),
         ],
         string='lastcheck',
         default='draft'
@@ -62,7 +59,6 @@ class taxes01(models.Model):
         [
             ('draft', 'Draft'),
             ('confirmed', 'Confirmed'),
-            ('done', 'Done'),
         ],
         string='salary',
         default='draft'
@@ -81,7 +77,6 @@ class taxes01(models.Model):
         [
             ('draft', 'Draft'),
             ('confirmed', 'Confirmed'),
-            ('done', 'Done'),
         ],
         string='withdrwal',
         default='draft'
@@ -90,7 +85,6 @@ class taxes01(models.Model):
         [
             ('draft', 'Draft'),
             ('confirmed', 'Confirmed'),
-            ('done', 'Done'),
         ],
         string='withdrwal',
         default='draft'
@@ -99,7 +93,6 @@ class taxes01(models.Model):
         [
             ('draft', 'Draft'),
             ('confirmed', 'Confirmed'),
-            ('done', 'Done'),
         ],
         string='withdrwal',
         default='draft'
